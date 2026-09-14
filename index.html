@@ -89,10 +89,12 @@ header img{height:52px;width:auto;display:block}
 header h1{margin:0;font-size:20px;font-weight:700;color:var(--ink)}
 header h1 span{white-space:nowrap}
 header p{margin:0;font-size:13px;color:var(--muted)}
-.shop{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;
-  border:1px solid var(--field);border-radius:6px;background:#fff;color:var(--ink);font-weight:600;font-size:14px;text-decoration:none}
-.shop svg{flex:none}
-.shop:hover{background:var(--soft);border-color:#AEB6C2}
+.shop{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;
+  border:0;border-radius:6px;background:var(--blue);color:#fff;font-weight:600;font-size:14px;text-decoration:none;
+  transition:background-color .15s}
+.shop svg{flex:none;color:var(--sun);transition:transform .15s}
+.shop:hover{background:#0935A0}
+.shop:hover svg{transform:translateY(-1px)}
 .shop:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 
 /* Aranjare */
