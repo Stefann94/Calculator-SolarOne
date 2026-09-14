@@ -85,19 +85,19 @@ body{
 
 /* Header */
 header{background:#fff;border-bottom:3px solid var(--sun)}
-header .in{max-width:1080px;margin:0 auto;padding:6px 20px;display:flex;align-items:center;gap:18px}
-header img{height:64px;width:auto;display:block}
+header .in{max-width:1080px;margin:0 auto;padding:1px 20px;display:flex;align-items:center;gap:18px}
+header img{height:76px;width:auto;display:block}
 header h1{margin:0;font-size:20px;font-weight:800;color:var(--blue-dark)}
 header h1 span{color:var(--blue)}
 header p{margin:0;font-size:13px;color:var(--muted)}
 
 /* Ecrane late: logo la jumătatea spațiului din stânga formularului, titlul aliniat cu formularul */
-@media (min-width:1440px){
+@media (min-width:1500px){
   header{position:relative}
-  header .in{min-height:78px}
+  header .in{min-height:90px}
   header .in > a:first-child{position:absolute;top:50%;
     left:calc(((100% - 1080px) / 2 + 20px) / 2);transform:translate(-50%,-50%);
-    width:min(152px, calc((100% - 1080px) / 2 + 4px))}
+    width:min(180px, calc((100% - 1080px) / 2 - 30px))}
   header .in > a:first-child img{width:100%;height:auto}
 }
 .shop{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:12px;
@@ -241,7 +241,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
 @media (max-width:820px){
   main{grid-template-columns:1fr}
   header .in{gap:12px}
-  header img{height:50px}
+  header img{height:58px}
   header h1{font-size:17px}
   header p{display:none}
   .shop{height:38px;padding:0 12px;font-size:14px}
@@ -268,7 +268,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
 /* ===== Telefon ===== */
 @media (max-width:640px){
   header .in{padding:8px 14px}
-  header img{height:44px}
+  header img{height:50px}
   header h1{font-size:16px;line-height:1.2}
   .shop span{display:none}
   .shop{width:42px;height:42px;padding:0;justify-content:center}
@@ -312,7 +312,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
 
 <header>
   <div class="in">
-    <a href="https://www.solarone.ro/" target="_blank" rel="noopener"><img src="solarone-logo.png" width="152" height="64" alt="SolarOne.ro – Sisteme Fotovoltaice"></a>
+    <a href="https://www.solarone.ro/" target="_blank" rel="noopener"><img src="solarone-logo.png" width="180" height="76" alt="SolarOne.ro – Sisteme Fotovoltaice"></a>
     <div>
       <h1>Calculator punctaj <span>Casa Verde</span></h1>
       <p>Alege sistemul, scrie aportul propriu și vezi punctajul estimat.</p>
