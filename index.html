@@ -90,6 +90,16 @@ header img{height:64px;width:auto;display:block}
 header h1{margin:0;font-size:20px;font-weight:800;color:var(--blue-dark)}
 header h1 span{color:var(--blue)}
 header p{margin:0;font-size:13px;color:var(--muted)}
+
+/* Ecrane late: logo la jumătatea spațiului din stânga formularului, titlul aliniat cu formularul */
+@media (min-width:1440px){
+  header{position:relative}
+  header .in{min-height:78px}
+  header .in > a:first-child{position:absolute;top:50%;
+    left:calc(((100% - 1080px) / 2 + 20px) / 2);transform:translate(-50%,-50%);
+    width:min(152px, calc((100% - 1080px) / 2 + 4px))}
+  header .in > a:first-child img{width:100%;height:auto}
+}
 .shop{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:12px;
   background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;font-weight:700;font-size:15px;text-decoration:none;
   box-shadow:0 6px 16px rgba(12,67,190,.25);transition:transform .12s,box-shadow .12s}
