@@ -147,6 +147,9 @@ input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(12,6
 .btn:hover:not(:disabled){filter:brightness(1.06)}
 .btn:disabled{background:#E3E8F0;color:#8A97AB;cursor:not-allowed}
 .why{font-size:12.5px;color:var(--muted);text-align:center;margin-top:6px;min-height:17px}
+.why.sent{color:var(--ok);font-weight:600}
+.why.err{color:var(--bad);font-weight:600}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
 /* Result */
 .result{padding:0;overflow:hidden}
@@ -275,6 +278,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
     <div class="row">
       <div class="lbl"><b>4</b> Email</div>
       <input id="email" type="email" placeholder="nume@exemplu.ro" autocomplete="email">
+      <input id="website" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
       <label class="consent">
         <input id="consent" type="checkbox">
         <span>Sunt de acord ca SolarOne.ro să îmi trimită pe email informații și oferte despre sisteme fotovoltaice și de stocare.</span>
@@ -452,21 +456,35 @@ function showResult(){
   return {s:s, total:total};
 }
 
+// Trimite datele la Google Apps Script (vezi google-apps-script/INSTRUCTIUNI.md),
+// care emailează firma și clientul și salvează calculul în Google Sheet.
+var lastSent = '';
 function sendLead(s, total){
   if (!LEAD_ENDPOINT) return;
+  var label = s.inv.parentNode.querySelector('strong').textContent + ' ' + s.inv.parentNode.querySelector('small').textContent;
+  var body = JSON.stringify({
+    email: email.value.trim(),
+    consent: consent.checked,
+    website: $('website').value,
+    invertor: label,
+    baterie_kwh: s.cap,
+    valoare_investitie: s.investitie,
+    aport_propriu: s.aport,
+    scor: Number(total.toFixed(1))
+  });
+  var why = $('why');
+  why.className = 'why sent';
+  why.textContent = '✉️ Rezultatul a fost trimis și pe ' + email.value.trim();
+  if (body === lastSent) return; // același calcul, nu retrimitem
+  lastSent = body;
   fetch(LEAD_ENDPOINT, {
-    method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body: JSON.stringify({
-      timestamp: new Date().toISOString(),
-      email: email.value.trim(),
-      invertor: s.inv.nextElementSibling.textContent,
-      baterie_kwh: s.cap,
-      valoare_investitie: s.investitie,
-      finantare_AFM: s.finantare,
-      aport_propriu: s.aport,
-      scor: Number(total.toFixed(1))
-    })
-  }).catch(function(e){ console.error('Trimiterea datelor a eșuat:', e); });
+    method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: body
+  }).catch(function(e){
+    console.error('Trimiterea datelor a eșuat:', e);
+    lastSent = '';
+    why.className = 'why err';
+    why.textContent = 'Nu am putut trimite emailul. Verifică conexiunea și apasă din nou.';
+  });
 }
 
 /* Panoul rămâne gri, fără scor, până la apăsarea butonului; orice modificare îl blochează din nou */
@@ -484,7 +502,7 @@ function lockResult(){
 }
 
 /* ===== Evenimente ===== */
-function onChange(){ lockResult(); refresh(); }
+function onChange(){ $('why').className = 'why'; lockResult(); refresh(); }
 function onSystemChange(){
   if (!own.dataset.manual) own.value = state().bestAport;
   onChange();
