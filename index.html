@@ -99,7 +99,7 @@ header p{margin:0;font-size:13px;color:var(--muted)}
 
 /* Layout */
 main{width:100%;max-width:1080px;margin:0 auto;padding:12px 20px;
-  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start;align-content:start}
+  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:stretch;align-content:start}
 .card{background:#fff;border-radius:16px;box-shadow:0 8px 28px rgba(6,27,58,.08);padding:16px 22px}
 
 /* Steps */
@@ -165,7 +165,16 @@ header h1 span{white-space:nowrap}
 @media (max-width:640px){ .lbl small::before{content:""} }
 
 /* Result */
-.result{padding:0;overflow:hidden}
+.result{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.result > .result-head{flex:none}
+.result > .result-body{flex:1 0 auto;display:flex;flex-direction:column}
+.result .tip{margin-top:auto}
+.result .crit + .crit{margin-bottom:14px}
+@media (min-width:821px){
+  .result .gauge{width:196px;height:196px}
+  .result .gauge .num{font-size:52px}
+  .result .crit{margin-top:18px}
+}
 .result-head{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;padding:12px 20px;font-weight:800;font-size:16px}
 .result-body{padding:14px 20px 16px}
 .gauge{position:relative;width:170px;height:170px;margin:0 auto}
