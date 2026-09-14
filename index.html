@@ -151,6 +151,19 @@ input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(12,6
 .why.err{color:var(--bad);font-weight:600}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
+/* Elemente folosite doar pe telefon (panoul cu rezultat) */
+.result-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sheet-close{display:none;place-items:center;flex:none;width:36px;height:36px;border:0;border-radius:50%;
+  background:rgba(255,255,255,.16);color:#fff;font-size:18px;line-height:1;cursor:pointer}
+.sheet-edit{display:none;width:100%;height:50px;margin-top:12px;border:2px solid var(--line);border-radius:12px;
+  background:#fff;color:var(--blue);font:inherit;font-size:16px;font-weight:700;cursor:pointer}
+.backdrop{display:none;position:fixed;inset:0;z-index:55;background:rgba(6,27,58,.5)}
+.sheet-close:focus{outline:none}
+.sheet-close:focus-visible{outline:3px solid var(--sun);outline-offset:1px}
+header h1 span{white-space:nowrap}
+.lbl small::before{content:"– "}
+@media (max-width:640px){ .lbl small::before{content:""} }
+
 /* Result */
 .result{padding:0;overflow:hidden}
 .result-head{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;padding:12px 20px;font-weight:800;font-size:16px}
@@ -205,6 +218,7 @@ input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(12,6
 footer{font-size:12px;color:var(--muted);text-align:center;padding:4px 20px 12px}
 footer a{color:var(--blue);font-weight:600;text-decoration:none}
 
+/* ===== Tabletă și telefon ===== */
 @media (max-width:820px){
   main{grid-template-columns:1fr}
   header .in{gap:12px}
@@ -212,15 +226,66 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
   header h1{font-size:17px}
   header p{display:none}
   .shop{height:38px;padding:0 12px;font-size:14px}
+
+  /* butonul rămâne lipit jos cât timp completezi formularul */
+  .actions{position:sticky;bottom:0;z-index:5;background:#fff;margin:4px -22px -16px;
+    padding:10px 22px calc(10px + env(safe-area-inset-bottom));
+    border-top:1px solid var(--line);border-radius:0 0 16px 16px;box-shadow:0 -8px 20px rgba(6,27,58,.07)}
+  .actions .why{margin-top:4px}
+
+  /* rezultatul devine un panou care urcă de jos */
+  .result{position:fixed;left:0;right:0;bottom:0;z-index:60;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;
+    border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom);
+    transform:translateY(105%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}
+  .result.open{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+  .result-head{position:sticky;top:0;z-index:1;padding-top:20px}
+  .result-head::before{content:"";position:absolute;top:8px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:4px;background:rgba(255,255,255,.45)}
+  .sheet-close{display:grid}
+  .sheet-edit{display:block}
+  .backdrop.show{display:block}
+  body.sheet-open{overflow:hidden}
 }
-@media (max-width:560px){
+
+/* ===== Telefon ===== */
+@media (max-width:640px){
+  header .in{padding:8px 14px}
+  header img{height:38px}
+  header h1{font-size:16px;line-height:1.2}
   .shop span{display:none}
-  .shop{width:42px;padding:0;justify-content:center}
-}
-@media (max-width:480px){
-  .opts{grid-template-columns:repeat(2,1fr)}
-  .card{padding:16px}
-  .result{padding:0}
+  .shop{width:42px;height:42px;padding:0;justify-content:center}
+
+  main{padding:12px 12px 16px;gap:12px}
+  .card{padding:16px 14px}
+  .result{padding:0 0 env(safe-area-inset-bottom);border-radius:20px 20px 0 0}
+  .actions{margin:12px -14px -16px;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+
+  .row{margin-bottom:20px}
+  .lbl{font-size:16px;flex-wrap:wrap;row-gap:2px}
+  .lbl small{flex-basis:100%;padding-left:30px}
+  .opts{grid-template-columns:repeat(2,1fr);gap:10px}
+  .opt span{min-height:62px;border-radius:14px}
+  .opt span strong{font-size:18px}
+  .opt span small{font-size:13px}
+
+  .money{grid-template-columns:1fr;gap:8px}
+  .box{flex-direction:row;justify-content:space-between;align-items:center;min-height:0;padding:10px 14px}
+  .box small{font-size:13px}
+  input[type=number]{height:56px;font-size:20px}
+  input[type=email]{height:52px}
+  .req{font-size:13.5px}
+
+  .consent{margin:10px 0 0;padding:12px;background:var(--bg);border-radius:12px;font-size:13.5px}
+  .consent input{width:22px;height:22px}
+  .btn{height:54px}
+
+  .result-body{padding:14px 16px 18px}
+  .gauge{width:150px;height:150px}
+  .gauge .num{font-size:40px}
+
+  .seo{padding:0 12px 16px}
+  .seo .card{padding:20px 16px}
+  .seo h2{font-size:19px}
+  footer{padding:4px 16px 24px}
 }
 </style>
 </head>
@@ -254,7 +319,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
     </div>
 
     <div class="row">
-      <div class="lbl"><b>2</b> Baterie <small>– de la 20 kWh primești punctaj maxim</small></div>
+      <div class="lbl"><b>2</b> Baterie <small>de la 20 kWh primești punctaj maxim</small></div>
       <div class="opts">
         <label class="opt"><input type="radio" name="battery" value="16.1" data-price="11000"><span><strong>16 kWh</strong><small>40,3 p</small></span></label>
         <label class="opt"><input type="radio" name="battery" value="20" data-price="12000" checked><span><strong>20 kWh</strong><small>50 p</small></span></label>
@@ -283,13 +348,15 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
         <input id="consent" type="checkbox">
         <span>Sunt de acord ca SolarOne.ro să îmi trimită pe email informații și oferte despre sisteme fotovoltaice și de stocare.</span>
       </label>
-      <button class="btn" id="calculate" disabled>Vezi punctajul</button>
-      <div class="why" id="why"></div>
+      <div class="actions">
+        <button class="btn" id="calculate" disabled>Vezi punctajul</button>
+        <div class="why" id="why"></div>
+      </div>
     </div>
   </section>
 
   <aside class="card result locked" aria-live="polite">
-    <div class="result-head">Punctajul tău estimat</div>
+    <div class="result-head"><span>Punctajul tău estimat</span><button class="sheet-close" type="button" aria-label="Închide">✕</button></div>
     <div class="result-body">
       <div class="gauge">
         <svg viewBox="0 0 120 120" aria-hidden="true">
@@ -313,8 +380,10 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
       </div>
 
       <div class="tip" id="tip">🔒 Completează pașii 1–4 și apasă <b>Vezi punctajul</b>.</div>
+      <button class="sheet-edit" type="button">Modifică datele</button>
     </div>
   </aside>
+  <div class="backdrop" id="backdrop"></div>
 </main>
 
 <section class="seo" id="ghid">
@@ -516,10 +585,32 @@ calculate.addEventListener('click', function(){
   if (calculate.disabled) return;
   var r = showResult();
   if (!r) return;
-  document.querySelector('.result').classList.remove('locked');
-  if (window.matchMedia('(max-width:820px)').matches) document.querySelector('.result').scrollIntoView({behavior:'smooth'});
+  resultEl.classList.remove('locked');
+  if (mobile.matches) openSheet();
   sendLead(r.s, r.total);
 });
+
+/* ===== Telefon: rezultatul se deschide ca panou de jos ===== */
+var mobile = window.matchMedia('(max-width:820px)');
+var resultEl = document.querySelector('.result'), backdrop = $('backdrop');
+function openSheet(){
+  resultEl.scrollTop = 0;
+  resultEl.classList.add('open');
+  backdrop.classList.add('show');
+  document.body.classList.add('sheet-open');
+  resultEl.querySelector('.sheet-close').focus({preventScroll:true});
+}
+function closeSheet(){
+  if (!resultEl.classList.contains('open')) return;
+  resultEl.classList.remove('open');
+  backdrop.classList.remove('show');
+  document.body.classList.remove('sheet-open');
+  calculate.focus({preventScroll:true});
+}
+backdrop.addEventListener('click', closeSheet);
+document.querySelectorAll('.sheet-close,.sheet-edit').forEach(function(b){ b.addEventListener('click', closeSheet); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeSheet(); });
+if (mobile.addEventListener) mobile.addEventListener('change', closeSheet); else mobile.addListener(closeSheet);
 
 onSystemChange();
 </script>
