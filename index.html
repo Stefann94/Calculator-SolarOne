@@ -226,12 +226,26 @@ header h1 span{white-space:nowrap}
 .seo table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
 .seo th,.seo td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 .seo th{background:var(--bg);font-weight:700}
-.seo details{border-bottom:1px solid var(--line);padding:12px 0}
-.seo details:last-child{border-bottom:0}
-.seo summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
-.seo summary::after{content:"+";color:var(--blue);font-size:20px;line-height:1}
-.seo details[open] summary::after{content:"–"}
-.seo details p{margin:8px 0 0}
+/* FAQ – întrebări care se deschid animat */
+.seo details{border:1px solid var(--line);border-radius:12px;margin-top:10px;overflow:hidden;background:#fff;
+  transition:border-color .2s,background-color .2s,box-shadow .25s}
+.seo details:hover{border-color:#B9CBEE}
+.seo details[open]{border-color:var(--blue);background:#FAFCFF;box-shadow:0 6px 18px rgba(12,67,190,.08)}
+.seo summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:14px 16px;transition:color .2s}
+.seo summary::-webkit-details-marker{display:none}
+.seo summary:hover,.seo details[open] summary{color:var(--blue)}
+.seo summary:focus-visible{outline:3px solid rgba(12,67,190,.35);outline-offset:-3px;border-radius:12px}
+.seo summary::after{content:"";flex:none;width:28px;height:28px;border-radius:50%;
+  background:var(--blue-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 1.5v9M1.5 6h9' stroke='%230C43BE' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),background-color .25s}
+.seo summary:hover::after{transform:scale(1.1)}
+.seo details[open] summary::after{transform:rotate(45deg);background-color:var(--sun)}
+.seo details p{margin:0;padding:0 16px 16px;animation:faqIn .4s ease both}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .seo details,.seo details *,.seo details *::after{animation:none!important;transition:none!important}
+}
 .seo .back{display:inline-block;margin-top:6px;font-weight:700;color:var(--blue);text-decoration:none}
 
 footer{font-size:12px;color:var(--muted);text-align:center;padding:4px 20px 12px}
@@ -630,6 +644,23 @@ backdrop.addEventListener('click', closeSheet);
 document.querySelectorAll('.sheet-close,.sheet-edit').forEach(function(b){ b.addEventListener('click', closeSheet); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeSheet(); });
 if (mobile.addEventListener) mobile.addEventListener('change', closeSheet); else mobile.addListener(closeSheet);
+
+/* ===== FAQ: deschidere și închidere lină ===== */
+document.querySelectorAll('.seo details').forEach(function(d){
+  var summary = d.querySelector('summary'), anim = null, closing = false;
+  summary.addEventListener('click', function(e){
+    if (!d.animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    var opening = closing || !d.open;
+    var start = d.offsetHeight, end;
+    if (anim) anim.cancel();
+    closing = !opening;
+    if (opening) { d.open = true; end = d.offsetHeight; }
+    else end = summary.offsetHeight + (d.offsetHeight - d.clientHeight);
+    anim = d.animate({height:[start + 'px', end + 'px']}, {duration:320, easing:'cubic-bezier(.2,.8,.2,1)'});
+    anim.onfinish = function(){ anim = null; if (closing) { d.open = false; closing = false; } };
+  });
+});
 
 onSystemChange();
 </script>
