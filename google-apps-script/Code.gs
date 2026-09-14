@@ -166,14 +166,14 @@ function sendClientEmail(l) {
     '<p style="margin:0 0 4px;color:#5B6B82">Punctajul tău estimat Casa Verde</p>' +
     '<div style="font-size:48px;font-weight:900;color:#061B3A;line-height:1.1">' + pts(l.total) +
     '<span style="font-size:18px;color:#5B6B82;font-weight:600"> / 100 puncte</span></div>' +
-    '<span style="display:inline-block;margin:8px 0 18px;padding:4px 14px;border-radius:99px;font-weight:700;background:' + lb.bg + ';color:' + lb.color + '">' + lb.text + '</span>' +
+    '<div style="margin:6px 0 18px;font-weight:600;color:' + lb.color + '">' + lb.text + '</div>' +
     '<table style="width:100%;border-collapse:collapse;font-size:15px">' +
     '<tr><td style="padding:8px 0;border-bottom:1px solid #E3E8F0">Contribuție proprie</td><td style="padding:8px 0;border-bottom:1px solid #E3E8F0;text-align:right"><b>' + pts(l.pOwn) + '</b> / 50 p</td></tr>' +
     '<tr><td style="padding:8px 0;border-bottom:1px solid #E3E8F0">Capacitate baterie (' + String(l.kwh).replace('.', ',') + ' kWh)</td><td style="padding:8px 0;border-bottom:1px solid #E3E8F0;text-align:right"><b>' + pts(l.pBat) + '</b> / 50 p</td></tr>' +
     '<tr><td style="padding:8px 0;color:#5B6B82">Investiție / aport / finanțare AFM</td><td style="padding:8px 0;text-align:right;color:#5B6B82">' + lei(l.investitie) + ' / ' + lei(l.aport) + ' / ' + lei(l.finantare) + '</td></tr>' +
     '</table>' +
-    '<p style="margin:18px 0;padding:12px 14px;background:#F1F5FB;border-radius:10px">💡 ' + tip(l) + '</p>' +
-    '<a href="' + SHOP_URL + '" style="display:inline-block;background:#F7B500;color:#061B3A;font-weight:800;text-decoration:none;padding:13px 24px;border-radius:10px">Vizitează magazinul SolarOne.ro</a>' +
+    '<p style="margin:18px 0;padding-top:14px;border-top:1px solid #DDE1E7">' + tip(l) + '</p>' +
+    '<a href="' + SHOP_URL + '" style="display:inline-block;background:#F7B500;color:#1B2430;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:6px">Vizitează magazinul SolarOne.ro</a>' +
     '<p style="margin:18px 0 0;color:#5B6B82;font-size:13px">Ai întrebări despre dosarul Casa Verde? Răspunde la acest email și un consultant SolarOne te va ajuta.</p>' +
     '<p style="margin:10px 0 0;color:#8A97AB;font-size:12px">Calcul orientativ, fără garanția aprobării dosarului. Ai primit acest email pentru că ai folosit <a href="' + SITE_URL + '" style="color:#8A97AB">calculatorul Casa Verde</a>.</p>'
   );
@@ -190,9 +190,9 @@ function sendClientEmail(l) {
 }
 
 function wrap(inner) {
-  return '<div style="background:#F1F5FB;padding:24px 12px;font-family:Segoe UI,Arial,sans-serif">' +
-    '<div style="max-width:560px;margin:0 auto;background:#fff;border-radius:14px;overflow:hidden">' +
-    '<div style="background:#0C43BE;padding:14px 22px;color:#fff;font-weight:800;font-size:17px;border-bottom:4px solid #F7B500">SolarOne.ro · Calculator Casa Verde</div>' +
+  return '<div style="background:#F4F5F7;padding:24px 12px;font-family:Segoe UI,Arial,sans-serif;color:#1B2430">' +
+    '<div style="max-width:560px;margin:0 auto;background:#fff;border:1px solid #DDE1E7;border-radius:8px;overflow:hidden">' +
+    '<div style="padding:14px 22px;font-weight:700;font-size:16px;border-bottom:2px solid #F7B500">SolarOne.ro · Calculator Casa Verde</div>' +
     '<div style="padding:22px">' + inner + '</div></div></div>';
 }
 

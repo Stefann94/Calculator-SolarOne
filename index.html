@@ -7,7 +7,7 @@
 <meta name="description" content="Calculator Casa Verde gratuit: află în 30 de secunde punctajul AFM pentru sistemul de stocare (baterii) – contribuție proprie și capacitate kWh, după formulele din ghid.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://calculator.solarone.ro/">
-<meta name="theme-color" content="#0C43BE">
+<meta name="theme-color" content="#ffffff">
 <meta name="author" content="SolarOne.ro">
 
 <meta property="og:type" content="website">
@@ -70,10 +70,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <style>
 :root{
-  --blue:#0C43BE; --blue-dark:#061B3A; --blue-soft:#EAF1FF;
-  --sun:#F7B500; --sun-dark:#E58A00;
-  --ink:#10213F; --muted:#5B6B82; --line:#D5DEEC; --bg:#F1F5FB;
-  --ok:#1E8E4E; --warn:#B86E00; --bad:#C62E2E;
+  --blue:#0C43BE; --sun:#F7B500; --sun-hover:#E9AA00;
+  --ink:#1B2430; --muted:#5F6B7A; --line:#DDE1E7; --field:#C9CFD8; --bg:#F4F5F7; --soft:#F7F8FA;
+  --ok:#1E7B46; --warn:#A86400; --bad:#B42318;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
@@ -83,149 +82,142 @@ body{
   display:flex;flex-direction:column;min-height:100vh;
 }
 
-/* Header */
-header{background:#fff;border-bottom:3px solid var(--sun)}
-header .in{max-width:1080px;margin:0 auto;padding:6px 20px;display:flex;align-items:center;gap:18px}
+/* Antet */
+header{background:#fff;border-bottom:1px solid var(--line);box-shadow:inset 0 -2px 0 var(--sun)}
+header .in{max-width:1080px;margin:0 auto;padding:6px 20px 8px;display:flex;align-items:center;gap:18px}
 header img{height:52px;width:auto;display:block}
-header h1{margin:0;font-size:20px;font-weight:800;color:var(--blue-dark)}
-header h1 span{color:var(--blue)}
+header h1{margin:0;font-size:20px;font-weight:700;color:var(--ink)}
+header h1 span{white-space:nowrap}
 header p{margin:0;font-size:13px;color:var(--muted)}
-.shop{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:12px;
-  background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;font-weight:700;font-size:15px;text-decoration:none;
-  box-shadow:0 6px 16px rgba(12,67,190,.25);transition:transform .12s,box-shadow .12s}
-.shop svg{flex:none;color:var(--sun)}
-.shop:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(12,67,190,.32)}
-.shop:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.shop{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;
+  border:1px solid var(--field);border-radius:6px;background:#fff;color:var(--ink);font-weight:600;font-size:14px;text-decoration:none}
+.shop svg{flex:none}
+.shop:hover{background:var(--soft);border-color:#AEB6C2}
+.shop:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 
-/* Layout */
-main{width:100%;max-width:1080px;margin:0 auto;padding:12px 20px;
+/* Aranjare */
+main{width:100%;max-width:1080px;margin:0 auto;padding:14px 20px;
   display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:stretch;align-content:start}
-.card{background:#fff;border-radius:16px;box-shadow:0 8px 28px rgba(6,27,58,.08);padding:16px 22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px 20px}
 
-/* Steps */
+/* Pași */
 .row{margin-bottom:12px}
 .row:last-child{margin-bottom:0}
-.lbl{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:7px}
-.lbl b{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px}
+.lbl{display:flex;align-items:baseline;gap:6px;font-weight:700;font-size:15px;margin-bottom:7px}
+.lbl b{color:var(--muted);font-weight:600}
 .lbl small{font-weight:400;color:var(--muted);font-size:13px}
+.lbl small::before{content:"· "}
 
-/* Button choices */
+/* Opțiuni */
 .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .opt{position:relative}
 .opt input{position:absolute;opacity:0;pointer-events:none}
 .opt span{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:54px;text-align:center;
-  padding:6px;border:2px solid var(--line);border-radius:11px;cursor:pointer;background:#fff;transition:.12s;user-select:none}
-.opt span strong{font-size:17px;font-weight:800;line-height:1.1}
+  padding:6px;border:1px solid var(--field);border-radius:6px;cursor:pointer;background:#fff;user-select:none}
+.opt span strong{font-size:16px;font-weight:700;line-height:1.15}
 .opt span small{font-size:12px;color:var(--muted)}
-.opt:hover span{border-color:#9FB6E6}
-.opt input:checked + span{border-color:var(--blue);background:var(--blue-soft)}
-.opt input:checked + span strong{color:var(--blue)}
-.opt input:focus-visible + span{outline:3px solid rgba(12,67,190,.35);outline-offset:1px}
-.alert{margin-top:6px;font-size:13px;font-weight:700;color:var(--bad)}
+.opt:hover span{border-color:#9AA4B2}
+.opt input:checked + span{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);background:#F5F8FE}
+.opt input:focus-visible + span{outline:2px solid var(--blue);outline-offset:2px}
+.alert{margin-top:6px;font-size:13px;font-weight:600;color:var(--bad)}
 
-/* Investment & own contribution */
+/* Investiție și aport */
 .money{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
-.box{background:var(--bg);border-radius:11px;padding:7px 12px;min-height:54px;display:flex;flex-direction:column;justify-content:center}
+.box{background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:6px 12px;min-height:50px;display:flex;flex-direction:column;justify-content:center}
 .box small{font-size:12px;color:var(--muted)}
-.box strong{font-size:19px;font-weight:800;color:var(--blue-dark)}
+.box strong{font-size:18px;font-weight:700}
 .field{position:relative}
 input[type=number],input[type=email]{
-  width:100%;height:48px;padding:0 44px 0 12px;border:2px solid var(--line);border-radius:11px;
-  font:inherit;font-size:18px;font-weight:700;color:var(--ink);background:#fff}
+  width:100%;height:50px;padding:0 44px 0 12px;border:1px solid var(--field);border-radius:6px;
+  font:inherit;font-size:18px;font-weight:600;color:var(--ink);background:#fff}
 input[type=email]{font-size:16px;font-weight:400;padding-right:12px}
-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(12,67,190,.14)}
-.field span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:600}
-.field input.bad{border-color:var(--bad)}
+input:focus{outline:none;border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.field span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.field input.bad{border-color:var(--bad);box-shadow:inset 0 0 0 1px var(--bad)}
 .req{font-size:13px;margin-top:6px;color:var(--muted)}
-.req.ok{color:var(--ok)} .req.bad{color:var(--bad);font-weight:600}
+.req.ok{color:var(--ok)} .req.bad{color:var(--bad)}
 
 .consent{display:flex;gap:8px;align-items:flex-start;margin:8px 0 12px;font-size:12.5px;color:var(--muted);cursor:pointer}
-.consent input{width:17px;height:17px;margin:1px 0 0;accent-color:var(--blue);flex:none}
+.consent input{width:16px;height:16px;margin:1px 0 0;accent-color:var(--blue);flex:none}
 
-.btn{width:100%;height:50px;border:0;border-radius:12px;font:inherit;font-size:17px;font-weight:800;cursor:pointer;
-  background:linear-gradient(135deg,var(--sun),var(--sun-dark));color:var(--blue-dark)}
-.btn:hover:not(:disabled){filter:brightness(1.06)}
-.btn:disabled{background:#E3E8F0;color:#8A97AB;cursor:not-allowed}
+.btn{width:100%;height:48px;border:0;border-radius:6px;font:inherit;font-size:16px;font-weight:700;cursor:pointer;
+  background:var(--sun);color:var(--ink)}
+.btn:hover:not(:disabled){background:var(--sun-hover)}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.btn:disabled{background:#E6E8EC;color:#8C95A1;cursor:not-allowed}
 .why{font-size:12.5px;color:var(--muted);text-align:center;margin-top:6px;min-height:17px}
-.why.sent{color:var(--ok);font-weight:600}
-.why.err{color:var(--bad);font-weight:600}
+.why.sent{color:var(--ok)}
+.why.err{color:var(--bad)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
-/* Elemente folosite doar pe telefon (panoul cu rezultat) */
-.result-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.sheet-close{display:none;place-items:center;flex:none;width:36px;height:36px;border:0;border-radius:50%;
-  background:rgba(255,255,255,.16);color:#fff;font-size:18px;line-height:1;cursor:pointer}
-.sheet-edit{display:none;width:100%;height:50px;margin-top:12px;border:2px solid var(--line);border-radius:12px;
-  background:#fff;color:var(--blue);font:inherit;font-size:16px;font-weight:700;cursor:pointer}
-.backdrop{display:none;position:fixed;inset:0;z-index:55;background:rgba(6,27,58,.5)}
-.sheet-close:focus{outline:none}
-.sheet-close:focus-visible{outline:3px solid var(--sun);outline-offset:1px}
-header h1 span{white-space:nowrap}
-.lbl small::before{content:"– "}
-@media (max-width:640px){ .lbl small::before{content:""} }
-
-/* Result */
+/* Rezultat */
 .result{padding:0;overflow:hidden;display:flex;flex-direction:column}
-.result > .result-head{flex:none}
-.result > .result-body{flex:1 0 auto;display:flex;flex-direction:column}
-.result .tip{margin-top:auto}
-.result .crit + .crit{margin-bottom:14px}
-@media (min-width:821px){
-  .result .gauge{width:196px;height:196px}
-  .result .gauge .num{font-size:52px}
-  .result .crit{margin-top:18px}
-}
-.result-head{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;padding:12px 20px;font-weight:800;font-size:16px}
-.result-body{padding:14px 20px 16px}
-.gauge{position:relative;width:170px;height:170px;margin:0 auto}
+.result-head{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 20px;border-bottom:1px solid var(--line);font-weight:700;font-size:15px}
+.result-body{flex:1 0 auto;display:flex;flex-direction:column;padding:14px 20px 16px}
+.gauge{position:relative;width:170px;height:170px;margin:4px auto 0}
 .gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
-.gauge .bar{transition:stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1)}
+.gauge .bar{transition:stroke-dashoffset .6s ease-out}
 .gauge .center{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
-.gauge .num{font-size:46px;font-weight:900;line-height:1;color:var(--blue-dark)}
-.gauge .of{font-size:12px;color:var(--muted);margin-top:3px}
-.badge{display:block;width:max-content;margin:8px auto 4px;padding:4px 14px;border-radius:99px;font-weight:800;font-size:14px;background:var(--bg);color:var(--muted)}
-.badge.low{background:#FDECEC;color:var(--bad)}
-.badge.mid{background:#FFF3D1;color:var(--warn)}
-.badge.high{background:#E1F5EA;color:var(--ok)}
+.gauge .num{font-size:44px;font-weight:700;line-height:1}
+.gauge .of{font-size:12px;color:var(--muted);margin-top:4px}
+.badge{display:block;text-align:center;margin:8px 0 2px;font-weight:600;font-size:14px;color:var(--muted)}
+.badge.low{color:var(--bad)} .badge.mid{color:var(--warn)} .badge.high{color:var(--ok)}
 .crit{margin-top:12px}
-.crit .top{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.crit + .crit{margin-bottom:14px}
+.crit .top{display:flex;justify-content:space-between;font-size:14px}
 .crit .f{font-size:12px;color:var(--muted)}
-.meter{height:9px;border-radius:9px;background:var(--blue-soft);overflow:hidden;margin-top:5px}
-.meter i{display:block;height:100%;width:0;border-radius:9px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.meter{height:6px;border-radius:3px;background:#E9ECF0;overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;width:0;transition:width .6s ease-out}
 .meter.own i{background:var(--blue)}
 .meter.bat i{background:var(--sun)}
-.tip{margin-top:14px;padding:9px 12px;border-radius:10px;background:var(--bg);font-size:13px;color:var(--ink)}
+.tip{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px}
+@media (min-width:821px){
+  .gauge{width:190px;height:190px}
+  .gauge .num{font-size:50px}
+  .crit{margin-top:18px}
+}
 
-/* Locked (grey) result until "Vezi punctajul" */
-.result.locked .result-head{background:#9AA5B5}
-.result.locked .gauge .num{color:#B3BCC9}
+/* Rezultat blocat (gri) până la „Vezi punctajul” */
+.result.locked{background:var(--soft)}
+.result.locked .result-head{color:var(--muted)}
+.result.locked .gauge .num{color:#B4BBC6}
 .result.locked .gauge .bar{visibility:hidden}
-.result.locked .crit,.result.locked .badge{opacity:.55}
-.result.locked .tip{background:#EEF1F5;color:var(--muted)}
-.result.locked{background:#F7F8FA}
+.result.locked .crit{opacity:.55}
+.result.locked .tip{color:var(--muted)}
 
-/* SEO content (below the calculator) */
-.seo{width:100%;max-width:1080px;margin:8px auto 0;padding:0 20px 20px}
-.seo .card{padding:24px 26px;margin-bottom:16px}
-.seo h2{font-size:21px;margin:0 0 10px;color:var(--blue-dark)}
-.seo h3{font-size:16px;margin:18px 0 6px;color:var(--blue)}
-.seo p,.seo li{color:#33445E;font-size:15px}
+/* Doar pe telefon */
+.sheet-close{display:none;place-items:center;flex:none;width:36px;height:36px;margin:-6px -8px -6px 0;border:0;background:none;
+  color:var(--muted);font-size:20px;line-height:1;cursor:pointer}
+.sheet-close:focus{outline:none}
+.sheet-close:focus-visible{outline:2px solid var(--blue)}
+.sheet-edit{display:none;width:100%;height:48px;margin-top:12px;border:1px solid var(--field);border-radius:6px;
+  background:#fff;color:var(--ink);font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.backdrop{display:none;position:fixed;inset:0;z-index:55;background:rgba(20,26,34,.45)}
+
+/* Conținut explicativ (SEO) */
+.seo{width:100%;max-width:1080px;margin:4px auto 0;padding:0 20px 20px}
+.seo .card{padding:22px 24px;margin-bottom:16px}
+.seo h2{font-size:20px;margin:0 0 10px}
+.seo h3{font-size:16px;margin:18px 0 6px}
+.seo p,.seo li{color:#3A4552;font-size:15px}
 .seo p{margin:0 0 10px}
-.seo code{background:var(--bg);border-radius:6px;padding:2px 7px;font-family:Consolas,ui-monospace,monospace;font-size:14px;color:var(--blue-dark)}
+.seo code{background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-family:Consolas,ui-monospace,monospace;font-size:14px}
 .seo .tbl{overflow-x:auto}
 .seo table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
 .seo th,.seo td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
-.seo th{background:var(--bg);font-weight:700}
+.seo th{background:var(--soft);font-weight:600}
 .seo details{border-bottom:1px solid var(--line);padding:12px 0}
 .seo details:last-child{border-bottom:0}
-.seo summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
-.seo summary::after{content:"+";color:var(--blue);font-size:20px;line-height:1}
-.seo details[open] summary::after{content:"–"}
+.seo summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.seo summary::-webkit-details-marker{display:none}
+.seo summary::after{content:"+";color:var(--muted);font-size:18px;line-height:1}
+.seo details[open] summary::after{content:"−"}
 .seo details p{margin:8px 0 0}
-.seo .back{display:inline-block;margin-top:6px;font-weight:700;color:var(--blue);text-decoration:none}
+.seo .back{display:inline-block;margin-top:6px;color:var(--blue)}
 
-footer{font-size:12px;color:var(--muted);text-align:center;padding:4px 20px 12px}
-footer a{color:var(--blue);font-weight:600;text-decoration:none}
+footer{font-size:12px;color:var(--muted);text-align:center;padding:4px 20px 14px}
+footer a{color:var(--blue);text-decoration:none}
 
 /* ===== Tabletă și telefon ===== */
 @media (max-width:820px){
@@ -237,18 +229,17 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
   .shop{height:38px;padding:0 12px;font-size:14px}
 
   /* butonul rămâne lipit jos cât timp completezi formularul */
-  .actions{position:sticky;bottom:0;z-index:5;background:#fff;margin:4px -22px -16px;
-    padding:10px 22px calc(10px + env(safe-area-inset-bottom));
-    border-top:1px solid var(--line);border-radius:0 0 16px 16px;box-shadow:0 -8px 20px rgba(6,27,58,.07)}
+  .actions{position:sticky;bottom:0;z-index:5;background:#fff;margin:4px -20px -16px;
+    padding:10px 20px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);border-radius:0 0 8px 8px}
   .actions .why{margin-top:4px}
 
   /* rezultatul devine un panou care urcă de jos */
   .result{position:fixed;left:0;right:0;bottom:0;z-index:60;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;
-    border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom);
-    transform:translateY(105%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}
-  .result.open{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1)}
-  .result-head{position:sticky;top:0;z-index:1;padding-top:20px}
-  .result-head::before{content:"";position:absolute;top:8px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:4px;background:rgba(255,255,255,.45)}
+    border:0;border-radius:12px 12px 0 0;padding-bottom:env(safe-area-inset-bottom);background:#fff;
+    transform:translateY(105%);visibility:hidden;transition:transform .25s ease-out,visibility 0s .25s}
+  .result.open{transform:none;visibility:visible;transition:transform .25s ease-out}
+  .result-head{position:sticky;top:0;z-index:1;background:#fff;padding-top:18px}
+  .result-head::before{content:"";position:absolute;top:7px;left:50%;width:36px;height:4px;margin-left:-18px;border-radius:2px;background:#D3D8DF}
   .sheet-close{display:grid}
   .sheet-edit{display:block}
   .backdrop.show{display:block}
@@ -257,43 +248,44 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
 
 /* ===== Telefon ===== */
 @media (max-width:640px){
-  header .in{padding:8px 14px}
+  header .in{padding:8px 14px 10px}
   header img{height:38px}
   header h1{font-size:16px;line-height:1.2}
   .shop span{display:none}
-  .shop{width:42px;height:42px;padding:0;justify-content:center}
+  .shop{width:40px;height:40px;padding:0;justify-content:center}
 
   main{padding:12px 12px 16px;gap:12px}
   .card{padding:16px 14px}
-  .result{padding:0 0 env(safe-area-inset-bottom);border-radius:20px 20px 0 0}
+  .result{padding:0 0 env(safe-area-inset-bottom)}
   .actions{margin:12px -14px -16px;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
 
   .row{margin-bottom:20px}
   .lbl{font-size:16px;flex-wrap:wrap;row-gap:2px}
-  .lbl small{flex-basis:100%;padding-left:30px}
-  .opts{grid-template-columns:repeat(2,1fr);gap:10px}
-  .opt span{min-height:62px;border-radius:14px}
-  .opt span strong{font-size:18px}
+  .lbl small{flex-basis:100%}
+  .lbl small::before{content:""}
+  .opts{grid-template-columns:repeat(2,1fr);gap:8px}
+  .opt span{min-height:60px}
+  .opt span strong{font-size:17px}
   .opt span small{font-size:13px}
 
   .money{grid-template-columns:1fr;gap:8px}
-  .box{flex-direction:row;justify-content:space-between;align-items:center;min-height:0;padding:10px 14px}
+  .box{flex-direction:row;justify-content:space-between;align-items:center;min-height:0;padding:10px 12px}
   .box small{font-size:13px}
-  input[type=number]{height:56px;font-size:20px}
-  input[type=email]{height:52px}
+  input[type=number]{height:54px;font-size:20px}
+  input[type=email]{height:50px}
   .req{font-size:13.5px}
 
-  .consent{margin:10px 0 0;padding:12px;background:var(--bg);border-radius:12px;font-size:13.5px}
-  .consent input{width:22px;height:22px}
-  .btn{height:54px}
+  .consent{margin:12px 0 0;font-size:13.5px}
+  .consent input{width:20px;height:20px}
+  .btn{height:52px}
 
   .result-body{padding:14px 16px 18px}
   .gauge{width:150px;height:150px}
   .gauge .num{font-size:40px}
 
   .seo{padding:0 12px 16px}
-  .seo .card{padding:20px 16px}
-  .seo h2{font-size:19px}
+  .seo .card{padding:18px 16px}
+  .seo h2{font-size:18px}
   footer{padding:4px 16px 24px}
 }
 </style>
@@ -308,7 +300,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
       <p>Alege sistemul, scrie aportul propriu și vezi punctajul estimat.</p>
     </div>
     <a class="shop" href="https://www.solarone.ro/" target="_blank" rel="noopener" aria-label="Vizitează magazinul SolarOne.ro">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/><path d="M10 20v-4h4v4"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/><path d="M10 20v-4h4v4"/></svg>
       <span>Vizitează magazinul</span>
     </a>
   </div>
@@ -317,18 +309,18 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
 <main>
   <section class="card">
     <div class="row">
-      <div class="lbl"><b>1</b> Invertor</div>
+      <div class="lbl"><b>1.</b> Invertor</div>
       <div class="opts">
         <label class="opt"><input type="radio" name="inverter" value="6050" checked><span><strong>6 kW</strong><small>monofazic</small></span></label>
         <label class="opt"><input type="radio" name="inverter" value="12100"><span><strong>12 kW</strong><small>trifazic</small></span></label>
         <label class="opt"><input type="radio" name="inverter" value="16940"><span><strong>20 kW</strong><small>trifazic</small></span></label>
         <label class="opt"><input type="radio" name="inverter" value="0"><span><strong>Am deja</strong><small>hibrid Low Voltage</small></span></label>
       </div>
-      <div class="alert" id="lvWarning" hidden>Atenție: invertoarele Huawei NU sunt Low Voltage.</div>
+      <div class="alert" id="lvWarning" hidden>Atenție: invertoarele Huawei nu sunt Low Voltage.</div>
     </div>
 
     <div class="row">
-      <div class="lbl"><b>2</b> Baterie <small>de la 20 kWh primești punctaj maxim</small></div>
+      <div class="lbl"><b>2.</b> Baterie <small>de la 20 kWh primești punctaj maxim</small></div>
       <div class="opts">
         <label class="opt"><input type="radio" name="battery" value="16.1" data-price="11000"><span><strong>16 kWh</strong><small>40,3 p</small></span></label>
         <label class="opt"><input type="radio" name="battery" value="20" data-price="12000" checked><span><strong>20 kWh</strong><small>50 p</small></span></label>
@@ -338,7 +330,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
     </div>
 
     <div class="row">
-      <div class="lbl"><b>3</b> Aport propriu</div>
+      <div class="lbl"><b>3.</b> Aport propriu</div>
       <div class="money">
         <div class="box"><small>Valoare investiție</small><strong id="investment">0 lei</strong></div>
         <div class="field">
@@ -350,7 +342,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
     </div>
 
     <div class="row">
-      <div class="lbl"><b>4</b> Email</div>
+      <div class="lbl"><b>4.</b> Email</div>
       <input id="email" type="email" placeholder="nume@exemplu.ro" autocomplete="email">
       <input id="website" class="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
       <label class="consent">
@@ -365,12 +357,12 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
   </section>
 
   <aside class="card result locked" aria-live="polite">
-    <div class="result-head"><span>Punctajul tău estimat</span><button class="sheet-close" type="button" aria-label="Închide">✕</button></div>
+    <div class="result-head"><span>Punctaj estimat</span><button class="sheet-close" type="button" aria-label="Închide">✕</button></div>
     <div class="result-body">
       <div class="gauge">
         <svg viewBox="0 0 120 120" aria-hidden="true">
-          <circle cx="60" cy="60" r="52" fill="none" stroke="#EAF1FF" stroke-width="12"/>
-          <circle class="bar" id="gaugeBar" cx="60" cy="60" r="52" fill="none" stroke="#0C43BE" stroke-width="12" stroke-linecap="round"
+          <circle cx="60" cy="60" r="52" fill="none" stroke="#E9ECF0" stroke-width="9"/>
+          <circle class="bar" id="gaugeBar" cx="60" cy="60" r="52" fill="none" stroke="#0C43BE" stroke-width="9"
                   stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
         </svg>
         <div class="center"><div class="num" id="score">?</div><div class="of">din 100 puncte</div></div>
@@ -388,7 +380,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
         <div class="meter bat"><i id="batBar"></i></div>
       </div>
 
-      <div class="tip" id="tip">🔒 Completează pașii 1–4 și apasă <b>Vezi punctajul</b>.</div>
+      <div class="tip" id="tip">Punctajul apare după ce apeși <b>Vezi punctajul</b>.</div>
       <button class="sheet-edit" type="button">Modifică datele</button>
     </div>
   </aside>
@@ -418,7 +410,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
         </tbody>
       </table>
     </div>
-    <a class="back" href="#">↑ Calculează-ți punctajul</a>
+    <a class="back" href="#">Înapoi la calculator</a>
   </article>
 
   <article class="card">
@@ -496,9 +488,9 @@ function refresh(){
   } else if (s.aport > s.investitie) {
     req.className = 'req bad'; req.textContent = 'Aportul nu poate depăși investiția (' + money(s.investitie) + ').';
   } else if (!s.aportOK) {
-    req.className = 'req bad'; req.textContent = 'Prea mic — minimum ' + money(s.minAport) + '.';
+    req.className = 'req bad'; req.textContent = 'Aport prea mic. Minimum ' + money(s.minAport) + '.';
   } else {
-    req.className = 'req ok'; req.textContent = '✓ Finanțare AFM: ' + money(s.finantare) + ' · aport ' + Math.round(s.aport / s.investitie * 100) + '%';
+    req.className = 'req ok'; req.textContent = 'Finanțare AFM: ' + money(s.finantare) + ', aport ' + Math.round(s.aport / s.investitie * 100) + '%';
   }
 
   var why = '';
@@ -522,15 +514,15 @@ function showResult(){
   $('gaugeBar').style.strokeDashoffset = CIRC * (1 - total / 100);
 
   var msg = $('message'), bar = $('gaugeBar');
-  if (total < 75)       { msg.className = 'badge low';  msg.textContent = 'Punctaj redus';      bar.setAttribute('stroke', '#C62E2E'); }
-  else if (total <= 90) { msg.className = 'badge mid';  msg.textContent = 'Punctaj mediu';      bar.setAttribute('stroke', '#E58A00'); }
-  else                  { msg.className = 'badge high'; msg.textContent = 'Punctaj foarte bun'; bar.setAttribute('stroke', '#1E8E4E'); }
+  if (total < 75)       { msg.className = 'badge low';  msg.textContent = 'Punctaj redus';      bar.setAttribute('stroke', '#B42318'); }
+  else if (total <= 90) { msg.className = 'badge mid';  msg.textContent = 'Punctaj mediu';      bar.setAttribute('stroke', '#D08A00'); }
+  else                  { msg.className = 'badge high'; msg.textContent = 'Punctaj foarte bun'; bar.setAttribute('stroke', '#1E7B46'); }
 
   var tip = $('tip');
-  if (b < 50 && o < 50) tip.innerHTML = '💡 Alege o baterie de <b>20 kWh</b> și un aport de cel puțin <b>' + money(Math.ceil((Number(s.inv.value) + 12000) * 5 / 8)) + '</b> pentru punctaj maxim.';
-  else if (b < 50)      tip.innerHTML = '💡 Cu o baterie de <b>20 kWh</b> sau mai mare obții 50 p la capacitate.';
-  else if (o < 50)      tip.innerHTML = '💡 Mărește aportul propriu la <b>' + money(s.bestAport) + '</b> pentru 50 p la contribuție.';
-  else                  tip.innerHTML = '✅ Punctaj maxim pe ambele criterii! Contactează SolarOne.ro pentru ofertă.';
+  if (b < 50 && o < 50) tip.innerHTML = 'Alege o baterie de <b>20 kWh</b> și un aport de cel puțin <b>' + money(Math.ceil((Number(s.inv.value) + 12000) * 5 / 8)) + '</b> pentru punctaj maxim.';
+  else if (b < 50)      tip.innerHTML = 'Cu o baterie de <b>20 kWh</b> sau mai mare obții 50 p la capacitate.';
+  else if (o < 50)      tip.innerHTML = 'Mărește aportul propriu la <b>' + money(s.bestAport) + '</b> pentru 50 p la contribuție.';
+  else                  tip.innerHTML = 'Punctaj maxim pe ambele criterii. Contactează SolarOne.ro pentru ofertă.';
   return {s:s, total:total};
 }
 
@@ -552,7 +544,7 @@ function sendLead(s, total){
   });
   var why = $('why');
   why.className = 'why sent';
-  why.textContent = '✉️ Rezultatul a fost trimis și pe ' + email.value.trim();
+  why.textContent = 'Rezultatul a fost trimis și pe ' + email.value.trim();
   if (body === lastSent) return; // același calcul, nu retrimitem
   lastSent = body;
   fetch(LEAD_ENDPOINT, {
@@ -576,7 +568,7 @@ function lockResult(){
   $('gaugeBar').style.strokeDashoffset = CIRC;
   $('message').className = 'badge';
   $('message').textContent = 'Completează pașii 1–4';
-  $('tip').innerHTML = '🔒 Completează pașii 1–4 și apasă <b>Vezi punctajul</b>.';
+  $('tip').innerHTML = 'Punctajul apare după ce apeși <b>Vezi punctajul</b>.';
 }
 
 /* ===== Evenimente ===== */
