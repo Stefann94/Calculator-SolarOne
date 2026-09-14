@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculator punctaj Casa Verde – SolarOne.ro</title>
+<meta name="description" content="Află în câteva secunde punctajul estimat pentru programul Casa Verde – baterii. Calculator oferit de SolarOne.ro.">
+<link rel="icon" href="solarone-logo.png">
+<style>
+:root{
+  --blue:#0C43BE; --blue-dark:#061B3A; --blue-soft:#EAF1FF;
+  --sun:#F7B500; --sun-dark:#E58A00;
+  --ink:#10213F; --muted:#5B6B82; --line:#D5DEEC; --bg:#F1F5FB;
+  --ok:#1E8E4E; --warn:#B86E00; --bad:#C62E2E;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.4;font-size:15px;
+  display:flex;flex-direction:column;min-height:100vh;
+}
+
+/* Header */
+header{background:#fff;border-bottom:3px solid var(--sun)}
+header .in{max-width:1080px;margin:0 auto;padding:6px 20px;display:flex;align-items:center;gap:18px}
+header img{height:52px;width:auto;display:block}
+header h1{margin:0;font-size:20px;font-weight:800;color:var(--blue-dark)}
+header h1 span{color:var(--blue)}
+header p{margin:0;font-size:13px;color:var(--muted)}
+.shop{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:12px;
+  background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;font-weight:700;font-size:15px;text-decoration:none;
+  box-shadow:0 6px 16px rgba(12,67,190,.25);transition:transform .12s,box-shadow .12s}
+.shop svg{flex:none;color:var(--sun)}
+.shop:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(12,67,190,.32)}
+.shop:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+/* Layout */
+main{flex:1;width:100%;max-width:1080px;margin:0 auto;padding:12px 20px;
+  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start;align-content:start}
+.card{background:#fff;border-radius:16px;box-shadow:0 8px 28px rgba(6,27,58,.08);padding:16px 22px}
+
+/* Steps */
+.row{margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.lbl{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:7px}
+.lbl b{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px}
+.lbl small{font-weight:400;color:var(--muted);font-size:13px}
+
+/* Button choices */
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt span{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:54px;text-align:center;
+  padding:6px;border:2px solid var(--line);border-radius:11px;cursor:pointer;background:#fff;transition:.12s;user-select:none}
+.opt span strong{font-size:17px;font-weight:800;line-height:1.1}
+.opt span small{font-size:12px;color:var(--muted)}
+.opt:hover span{border-color:#9FB6E6}
+.opt input:checked + span{border-color:var(--blue);background:var(--blue-soft)}
+.opt input:checked + span strong{color:var(--blue)}
+.opt input:focus-visible + span{outline:3px solid rgba(12,67,190,.35);outline-offset:1px}
+.alert{margin-top:6px;font-size:13px;font-weight:700;color:var(--bad)}
+
+/* Investment & own contribution */
+.money{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
+.box{background:var(--bg);border-radius:11px;padding:7px 12px;min-height:54px;display:flex;flex-direction:column;justify-content:center}
+.box small{font-size:12px;color:var(--muted)}
+.box strong{font-size:19px;font-weight:800;color:var(--blue-dark)}
+.field{position:relative}
+input[type=number],input[type=email]{
+  width:100%;height:48px;padding:0 44px 0 12px;border:2px solid var(--line);border-radius:11px;
+  font:inherit;font-size:18px;font-weight:700;color:var(--ink);background:#fff}
+input[type=email]{font-size:16px;font-weight:400;padding-right:12px}
+input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(12,67,190,.14)}
+.field span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:600}
+.field input.bad{border-color:var(--bad)}
+.req{font-size:13px;margin-top:6px;color:var(--muted)}
+.req.ok{color:var(--ok)} .req.bad{color:var(--bad);font-weight:600}
+
+.consent{display:flex;gap:8px;align-items:flex-start;margin:8px 0 12px;font-size:12.5px;color:var(--muted);cursor:pointer}
+.consent input{width:17px;height:17px;margin:1px 0 0;accent-color:var(--blue);flex:none}
+
+.btn{width:100%;height:50px;border:0;border-radius:12px;font:inherit;font-size:17px;font-weight:800;cursor:pointer;
+  background:linear-gradient(135deg,var(--sun),var(--sun-dark));color:var(--blue-dark)}
+.btn:hover:not(:disabled){filter:brightness(1.06)}
+.btn:disabled{background:#E3E8F0;color:#8A97AB;cursor:not-allowed}
+.why{font-size:12.5px;color:var(--muted);text-align:center;margin-top:6px;min-height:17px}
+
+/* Result */
+.result{padding:0;overflow:hidden}
+.result-head{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;padding:12px 20px;font-weight:800;font-size:16px}
+.result-body{padding:14px 20px 16px}
+.gauge{position:relative;width:170px;height:170px;margin:0 auto}
+.gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge .bar{transition:stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1)}
+.gauge .center{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.gauge .num{font-size:46px;font-weight:900;line-height:1;color:var(--blue-dark)}
+.gauge .of{font-size:12px;color:var(--muted);margin-top:3px}
+.badge{display:block;width:max-content;margin:8px auto 4px;padding:4px 14px;border-radius:99px;font-weight:800;font-size:14px;background:var(--bg);color:var(--muted)}
+.badge.low{background:#FDECEC;color:var(--bad)}
+.badge.mid{background:#FFF3D1;color:var(--warn)}
+.badge.high{background:#E1F5EA;color:var(--ok)}
+.crit{margin-top:12px}
+.crit .top{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.crit .f{font-size:12px;color:var(--muted)}
+.meter{height:9px;border-radius:9px;background:var(--blue-soft);overflow:hidden;margin-top:5px}
+.meter i{display:block;height:100%;width:0;border-radius:9px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.meter.own i{background:var(--blue)}
+.meter.bat i{background:var(--sun)}
+.tip{margin-top:14px;padding:9px 12px;border-radius:10px;background:var(--bg);font-size:13px;color:var(--ink)}
+
+/* Locked (grey) result until "Vezi punctajul" */
+.result.locked .result-head{background:#9AA5B5}
+.result.locked .gauge .num{color:#B3BCC9}
+.result.locked .gauge .bar{visibility:hidden}
+.result.locked .crit,.result.locked .badge{opacity:.55}
+.result.locked .tip{background:#EEF1F5;color:var(--muted)}
+.result.locked{background:#F7F8FA}
+
+footer{font-size:12px;color:var(--muted);text-align:center;padding:4px 20px 12px}
+footer a{color:var(--blue);font-weight:600;text-decoration:none}
+
+@media (max-width:820px){
+  main{grid-template-columns:1fr}
+  header .in{gap:12px}
+  header img{height:42px}
+  header h1{font-size:17px}
+  header p{display:none}
+  .shop{height:38px;padding:0 12px;font-size:14px}
+}
+@media (max-width:560px){
+  .shop span{display:none}
+  .shop{width:42px;padding:0;justify-content:center}
+}
+@media (max-width:480px){
+  .opts{grid-template-columns:repeat(2,1fr)}
+  .card{padding:16px}
+  .result{padding:0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="in">
+    <a href="https://www.solarone.ro/" target="_blank" rel="noopener"><img src="solarone-logo.png" alt="SolarOne.ro – Sisteme Fotovoltaice"></a>
+    <div>
+      <h1>Calculator punctaj <span>Casa Verde</span></h1>
+      <p>Alege sistemul, scrie aportul propriu și vezi punctajul estimat.</p>
+    </div>
+    <a class="shop" href="https://www.solarone.ro/" target="_blank" rel="noopener" aria-label="Vizitează magazinul SolarOne.ro">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/><path d="M10 20v-4h4v4"/></svg>
+      <span>Vizitează magazinul</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <div class="row">
+      <div class="lbl"><b>1</b> Invertor</div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="inverter" value="6050" checked><span><strong>6 kW</strong><small>monofazic</small></span></label>
+        <label class="opt"><input type="radio" name="inverter" value="12100"><span><strong>12 kW</strong><small>trifazic</small></span></label>
+        <label class="opt"><input type="radio" name="inverter" value="16940"><span><strong>20 kW</strong><small>trifazic</small></span></label>
+        <label class="opt"><input type="radio" name="inverter" value="0"><span><strong>Am deja</strong><small>hibrid Low Voltage</small></span></label>
+      </div>
+      <div class="alert" id="lvWarning" hidden>Atenție: invertoarele Huawei NU sunt Low Voltage.</div>
+    </div>
+
+    <div class="row">
+      <div class="lbl"><b>2</b> Baterie <small>– de la 20 kWh primești punctaj maxim</small></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="battery" value="16.1" data-price="11000"><span><strong>16 kWh</strong><small>40,3 p</small></span></label>
+        <label class="opt"><input type="radio" name="battery" value="20" data-price="12000" checked><span><strong>20 kWh</strong><small>50 p</small></span></label>
+        <label class="opt"><input type="radio" name="battery" value="32.2" data-price="22000"><span><strong>32 kWh</strong><small>50 p</small></span></label>
+        <label class="opt"><input type="radio" name="battery" value="48.3" data-price="33000"><span><strong>48 kWh</strong><small>50 p</small></span></label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="lbl"><b>3</b> Aport propriu</div>
+      <div class="money">
+        <div class="box"><small>Valoare investiție</small><strong id="investment">0 lei</strong></div>
+        <div class="field">
+          <input id="own" type="number" min="0" step="100" inputmode="numeric" aria-label="Aport propriu în lei">
+          <span>lei</span>
+        </div>
+      </div>
+      <div class="req" id="ownRequirement"></div>
+    </div>
+
+    <div class="row">
+      <div class="lbl"><b>4</b> Email</div>
+      <input id="email" type="email" placeholder="nume@exemplu.ro" autocomplete="email">
+      <label class="consent">
+        <input id="consent" type="checkbox">
+        <span>Sunt de acord ca SolarOne.ro să îmi trimită pe email informații și oferte despre sisteme fotovoltaice și de stocare.</span>
+      </label>
+      <button class="btn" id="calculate" disabled>Vezi punctajul</button>
+      <div class="why" id="why"></div>
+    </div>
+  </section>
+
+  <aside class="card result locked" aria-live="polite">
+    <div class="result-head">Punctajul tău estimat</div>
+    <div class="result-body">
+      <div class="gauge">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="#EAF1FF" stroke-width="12"/>
+          <circle class="bar" id="gaugeBar" cx="60" cy="60" r="52" fill="none" stroke="#0C43BE" stroke-width="12" stroke-linecap="round"
+                  stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+        </svg>
+        <div class="center"><div class="num" id="score">?</div><div class="of">din 100 puncte</div></div>
+      </div>
+      <span class="badge" id="message">Completează pașii 1–4</span>
+
+      <div class="crit">
+        <div class="top"><span>Contribuție proprie</span><span><b id="ownScore">–</b> / 50 p</span></div>
+        <div class="f">30 × aport propriu ÷ finanțare AFM</div>
+        <div class="meter own"><i id="ownBar"></i></div>
+      </div>
+      <div class="crit">
+        <div class="top"><span>Capacitate baterie</span><span><b id="batteryScore">–</b> / 50 p</span></div>
+        <div class="f">kWh × 2,5</div>
+        <div class="meter bat"><i id="batBar"></i></div>
+      </div>
+
+      <div class="tip" id="tip">🔒 Completează pașii 1–4 și apasă <b>Vezi punctajul</b>.</div>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  Calculator orientativ, fără garanția aprobării dosarului. Puterea invertorului nu influențează punctajul. ·
+  <a href="https://www.solarone.ro/" target="_blank" rel="noopener">www.solarone.ro</a>
+</footer>
+
+<script>
+/* ===== Setări ===== */
+var AFM_MAX = 15000;      // finanțare maximă AFM (lei)
+var MIN_OWN_PCT = 0.25;   // aport propriu minim din investiție
+// Adresă (ex. Google Apps Script) unde se trimit emailurile colectate. Gol = nu se trimite nimic.
+var LEAD_ENDPOINT = '';
+
+/* ===== Utilitare ===== */
+function $(id){ return document.getElementById(id); }
+function money(n){ return new Intl.NumberFormat('ro-RO',{maximumFractionDigits:0}).format(n) + ' lei'; }
+function pts(n){ return n.toLocaleString('ro-RO',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+function picked(name){ return document.querySelector('input[name=' + name + ']:checked'); }
+
+var own = $('own'), email = $('email'), consent = $('consent'), calculate = $('calculate');
+var CIRC = 2 * Math.PI * 52;
+
+/* ===== Formulele din ghid ===== */
+function scoreOwn(aport, finantare){ return finantare <= 0 ? 50 : Math.min(50, 30 * aport / finantare); }
+function scoreBattery(kwh){ return Math.min(50, kwh * 2.5); }
+
+function state(){
+  var inv = picked('inverter'), bat = picked('battery');
+  var investitie = Number(inv.value) + Number(bat.dataset.price);
+  var aport = own.value === '' ? null : Math.max(0, Number(own.value) || 0);
+  var minAport = Math.max(Math.ceil(investitie * MIN_OWN_PCT), investitie - AFM_MAX, 0);
+  // aportul minim cu care contribuția proprie ia 50 p: 30·A/(I−A) ≥ 50 ⇔ A ≥ 5/8·I
+  var bestAport = Math.max(minAport, Math.ceil(investitie * 5 / 8));
+  var finantare = aport === null ? 0 : Math.min(AFM_MAX, Math.max(0, investitie - aport));
+  var aportOK = aport !== null && aport >= minAport && aport <= investitie;
+  return {inv:inv, investitie:investitie, aport:aport, minAport:minAport, bestAport:bestAport,
+          finantare:finantare, aportOK:aportOK, cap:Number(bat.value)};
+}
+
+function refresh(){
+  var s = state();
+  $('investment').textContent = money(s.investitie);
+  $('lvWarning').hidden = s.inv.value !== '0';
+
+  var req = $('ownRequirement');
+  own.classList.toggle('bad', s.aport !== null && !s.aportOK);
+  if (s.aport === null) {
+    req.className = 'req'; req.textContent = 'Minimum ' + money(s.minAport) + '.';
+  } else if (s.aport > s.investitie) {
+    req.className = 'req bad'; req.textContent = 'Aportul nu poate depăși investiția (' + money(s.investitie) + ').';
+  } else if (!s.aportOK) {
+    req.className = 'req bad'; req.textContent = 'Prea mic — minimum ' + money(s.minAport) + '.';
+  } else {
+    req.className = 'req ok'; req.textContent = '✓ Finanțare AFM: ' + money(s.finantare) + ' · aport ' + Math.round(s.aport / s.investitie * 100) + '%';
+  }
+
+  var why = '';
+  if (!s.aportOK) why = 'Completează un aport propriu valid (pasul 3).';
+  else if (!email.value.trim() || !email.validity.valid) why = 'Scrie o adresă de email validă.';
+  else if (!consent.checked) why = 'Bifează acordul de mai sus.';
+  $('why').textContent = why;
+  calculate.disabled = why !== '';
+}
+
+function showResult(){
+  var s = state();
+  if (!s.aportOK) return null;
+  var o = scoreOwn(s.aport, s.finantare), b = scoreBattery(s.cap), total = o + b;
+
+  $('score').textContent = pts(total);
+  $('ownScore').textContent = pts(o);
+  $('batteryScore').textContent = pts(b);
+  $('ownBar').style.width = (o * 2) + '%';
+  $('batBar').style.width = (b * 2) + '%';
+  $('gaugeBar').style.strokeDashoffset = CIRC * (1 - total / 100);
+
+  var msg = $('message'), bar = $('gaugeBar');
+  if (total < 75)       { msg.className = 'badge low';  msg.textContent = 'Punctaj redus';      bar.setAttribute('stroke', '#C62E2E'); }
+  else if (total <= 90) { msg.className = 'badge mid';  msg.textContent = 'Punctaj mediu';      bar.setAttribute('stroke', '#E58A00'); }
+  else                  { msg.className = 'badge high'; msg.textContent = 'Punctaj foarte bun'; bar.setAttribute('stroke', '#1E8E4E'); }
+
+  var tip = $('tip');
+  if (b < 50 && o < 50) tip.innerHTML = '💡 Alege o baterie de <b>20 kWh</b> și un aport de cel puțin <b>' + money(Math.ceil((Number(s.inv.value) + 12000) * 5 / 8)) + '</b> pentru punctaj maxim.';
+  else if (b < 50)      tip.innerHTML = '💡 Cu o baterie de <b>20 kWh</b> sau mai mare obții 50 p la capacitate.';
+  else if (o < 50)      tip.innerHTML = '💡 Mărește aportul propriu la <b>' + money(s.bestAport) + '</b> pentru 50 p la contribuție.';
+  else                  tip.innerHTML = '✅ Punctaj maxim pe ambele criterii! Contactează SolarOne.ro pentru ofertă.';
+  return {s:s, total:total};
+}
+
+function sendLead(s, total){
+  if (!LEAD_ENDPOINT) return;
+  fetch(LEAD_ENDPOINT, {
+    method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({
+      timestamp: new Date().toISOString(),
+      email: email.value.trim(),
+      invertor: s.inv.nextElementSibling.textContent,
+      baterie_kwh: s.cap,
+      valoare_investitie: s.investitie,
+      finantare_AFM: s.finantare,
+      aport_propriu: s.aport,
+      scor: Number(total.toFixed(1))
+    })
+  }).catch(function(e){ console.error('Trimiterea datelor a eșuat:', e); });
+}
+
+/* Panoul rămâne gri, fără scor, până la apăsarea butonului; orice modificare îl blochează din nou */
+function lockResult(){
+  document.querySelector('.result').classList.add('locked');
+  $('score').textContent = '?';
+  $('ownScore').textContent = '–';
+  $('batteryScore').textContent = '–';
+  $('ownBar').style.width = '0';
+  $('batBar').style.width = '0';
+  $('gaugeBar').style.strokeDashoffset = CIRC;
+  $('message').className = 'badge';
+  $('message').textContent = 'Completează pașii 1–4';
+  $('tip').innerHTML = '🔒 Completează pașii 1–4 și apasă <b>Vezi punctajul</b>.';
+}
+
+/* ===== Evenimente ===== */
+function onChange(){ lockResult(); refresh(); }
+function onSystemChange(){
+  if (!own.dataset.manual) own.value = state().bestAport;
+  onChange();
+}
+document.querySelectorAll('input[name=inverter],input[name=battery]').forEach(function(r){ r.addEventListener('change', onSystemChange); });
+own.addEventListener('input', function(){ own.dataset.manual = '1'; onChange(); });
+email.addEventListener('input', onChange);
+consent.addEventListener('change', onChange);
+calculate.addEventListener('click', function(){
+  refresh();
+  if (calculate.disabled) return;
+  var r = showResult();
+  if (!r) return;
+  document.querySelector('.result').classList.remove('locked');
+  if (window.matchMedia('(max-width:820px)').matches) document.querySelector('.result').scrollIntoView({behavior:'smooth'});
+  sendLead(r.s, r.total);
+});
+
+onSystemChange();
+</script>
+</body>
+</html>
