@@ -3,8 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculator punctaj Casa Verde – SolarOne.ro</title>
-<meta name="description" content="Află în câteva secunde punctajul estimat pentru programul Casa Verde – baterii. Calculator oferit de SolarOne.ro.">
+<title>Calculator Casa Verde – Punctaj Baterii AFM gratuit | SolarOne.ro</title>
+<meta name="description" content="Calculator Casa Verde gratuit: află în 30 de secunde punctajul AFM pentru sistemul de stocare (baterii) – contribuție proprie și capacitate kWh, după formulele din ghid.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://calculator.solarone.ro/">
+<meta name="theme-color" content="#0C43BE">
+<meta name="author" content="SolarOne.ro">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:site_name" content="SolarOne.ro">
+<meta property="og:url" content="https://calculator.solarone.ro/">
+<meta property="og:title" content="Calculator Casa Verde – află punctajul AFM pentru baterii">
+<meta property="og:description" content="Simulează gratuit punctajul Casa Verde: contribuție proprie + capacitate de stocare, maximum 100 de puncte.">
+<meta property="og:image" content="https://calculator.solarone.ro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Calculator punctaj Casa Verde – SolarOne.ro">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculator Casa Verde – află punctajul AFM pentru baterii">
+<meta name="twitter:description" content="Simulează gratuit punctajul Casa Verde: contribuție proprie + capacitate de stocare.">
+<meta name="twitter:image" content="https://calculator.solarone.ro/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.solarone.ro/#org",
+      "name": "SolarOne.ro",
+      "url": "https://www.solarone.ro/",
+      "logo": "https://calculator.solarone.ro/solarone-logo.png"
+    },
+    {
+      "@type": "WebApplication",
+      "name": "Calculator punctaj Casa Verde – Baterii",
+      "url": "https://calculator.solarone.ro/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "ro-RO",
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"},
+      "description": "Calculator gratuit pentru punctajul estimat în programul Casa Verde – sisteme de stocare: contribuție proprie (max. 50 p) și capacitatea bateriei (max. 50 p).",
+      "publisher": {"@id": "https://www.solarone.ro/#org"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Cum se calculează punctajul Casa Verde pentru contribuția proprie?",
+         "acceptedAnswer": {"@type": "Answer", "text": "Punctaj contribuție proprie = 30 × contribuția proprie ÷ finanțarea acordată de AFM (lei). Pentru o valoare mai mare de 50 se acordă punctajul maxim de 50 de puncte."}},
+        {"@type": "Question", "name": "Cum se calculează punctajul pentru capacitatea bateriei?",
+         "acceptedAnswer": {"@type": "Answer", "text": "CS = capacitatea sistemului de stocare în kWh × 2,5. De la 20 kWh în sus se acordă punctajul maxim de 50 de puncte."}},
+        {"@type": "Question", "name": "Ce baterie trebuie să aleg pentru punctaj maxim?",
+         "acceptedAnswer": {"@type": "Answer", "text": "O baterie de minimum 20 kWh obține 50 de puncte (20 × 2,5 = 50). O baterie de 16 kWh obține aproximativ 40 de puncte."}},
+        {"@type": "Question", "name": "Cât aport propriu îmi trebuie pentru 50 de puncte?",
+         "acceptedAnswer": {"@type": "Answer", "text": "Contribuția proprie obține 50 de puncte când aportul este de cel puțin 5/8 (62,5%) din valoarea investiției, adică atunci când aportul este de cel puțin 1,67 ori mai mare decât finanțarea AFM."}},
+        {"@type": "Question", "name": "Care este punctajul maxim în programul Casa Verde – baterii?",
+         "acceptedAnswer": {"@type": "Answer", "text": "Punctajul maxim este de 100 de puncte: 50 pentru contribuția proprie și 50 pentru capacitatea sistemului de stocare."}}
+      ]
+    }
+  ]
+}
+</script>
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <style>
@@ -37,7 +98,7 @@ header p{margin:0;font-size:13px;color:var(--muted)}
 .shop:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
 
 /* Layout */
-main{flex:1;width:100%;max-width:1080px;margin:0 auto;padding:12px 20px;
+main{width:100%;max-width:1080px;margin:0 auto;padding:12px 20px;
   display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start;align-content:start}
 .card{background:#fff;border-radius:16px;box-shadow:0 8px 28px rgba(6,27,58,.08);padding:16px 22px}
 
@@ -118,6 +179,26 @@ input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(12,6
 .result.locked .tip{background:#EEF1F5;color:var(--muted)}
 .result.locked{background:#F7F8FA}
 
+/* SEO content (below the calculator) */
+.seo{width:100%;max-width:1080px;margin:8px auto 0;padding:0 20px 20px}
+.seo .card{padding:24px 26px;margin-bottom:16px}
+.seo h2{font-size:21px;margin:0 0 10px;color:var(--blue-dark)}
+.seo h3{font-size:16px;margin:18px 0 6px;color:var(--blue)}
+.seo p,.seo li{color:#33445E;font-size:15px}
+.seo p{margin:0 0 10px}
+.seo code{background:var(--bg);border-radius:6px;padding:2px 7px;font-family:Consolas,ui-monospace,monospace;font-size:14px;color:var(--blue-dark)}
+.seo .tbl{overflow-x:auto}
+.seo table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+.seo th,.seo td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.seo th{background:var(--bg);font-weight:700}
+.seo details{border-bottom:1px solid var(--line);padding:12px 0}
+.seo details:last-child{border-bottom:0}
+.seo summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.seo summary::after{content:"+";color:var(--blue);font-size:20px;line-height:1}
+.seo details[open] summary::after{content:"–"}
+.seo details p{margin:8px 0 0}
+.seo .back{display:inline-block;margin-top:6px;font-weight:700;color:var(--blue);text-decoration:none}
+
 footer{font-size:12px;color:var(--muted);text-align:center;padding:4px 20px 12px}
 footer a{color:var(--blue);font-weight:600;text-decoration:none}
 
@@ -144,7 +225,7 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
 
 <header>
   <div class="in">
-    <a href="https://www.solarone.ro/" target="_blank" rel="noopener"><img src="solarone-logo.png" alt="SolarOne.ro – Sisteme Fotovoltaice"></a>
+    <a href="https://www.solarone.ro/" target="_blank" rel="noopener"><img src="solarone-logo.png" width="124" height="52" alt="SolarOne.ro – Sisteme Fotovoltaice"></a>
     <div>
       <h1>Calculator punctaj <span>Casa Verde</span></h1>
       <p>Alege sistemul, scrie aportul propriu și vezi punctajul estimat.</p>
@@ -231,6 +312,57 @@ footer a{color:var(--blue);font-weight:600;text-decoration:none}
     </div>
   </aside>
 </main>
+
+<section class="seo" id="ghid">
+  <article class="card">
+    <h2>Cum se calculează punctajul Casa Verde pentru baterii</h2>
+    <p>Calculatorul Casa Verde de mai sus aplică formulele din ghidul de finanțare AFM pentru sistemele de stocare. Punctajul final are maximum <b>100 de puncte</b> și se obține din două criterii, fiecare de maximum 50 de puncte.</p>
+
+    <h3>a) Punctajul pentru contribuția proprie (max. 50 p)</h3>
+    <p><code>Punctaj contribuție proprie = 30 × Contribuția proprie ÷ Finanțarea acordată de AFM (lei)</code></p>
+    <p>Punctajul este egal cu valoarea rezultată din formulă. Pentru o valoare mai mare de 50 se acordă punctajul maxim de 50 de puncte. Practic, obții 50 de puncte atunci când aportul propriu reprezintă cel puțin <b>62,5% din valoarea investiției</b>.</p>
+
+    <h3>b) Punctajul pentru capacitatea de stocare (max. 50 p)</h3>
+    <p><code>CS = Capacitatea sistemului de stocare (kWh) × 2,5</code></p>
+    <p>Punctajul este egal cu valoarea rezultată din formulă. De la <b>20 kWh</b> în sus se acordă punctajul maxim de 50 de puncte.</p>
+
+    <h3>Exemple de calcul</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Sistem</th><th>Investiție</th><th>Aport propriu</th><th>Finanțare AFM</th><th>Contribuție</th><th>Baterie</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>6 kW + 16 kWh</td><td>17.050 lei</td><td>9.000 lei</td><td>8.050 lei</td><td>33,5 p</td><td>40,3 p</td><td><b>73,8 p</b></td></tr>
+          <tr><td>6 kW + 20 kWh</td><td>18.050 lei</td><td>11.282 lei</td><td>6.768 lei</td><td>50 p</td><td>50 p</td><td><b>100 p</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <a class="back" href="#">↑ Calculează-ți punctajul</a>
+  </article>
+
+  <article class="card">
+    <h2>Întrebări frecvente despre punctajul Casa Verde</h2>
+    <details>
+      <summary>Ce baterie trebuie să aleg pentru punctaj maxim?</summary>
+      <p>O baterie de minimum 20 kWh obține 50 de puncte (20 × 2,5 = 50). O baterie de 16 kWh obține aproximativ 40 de puncte, iar bateriile de 32 sau 48 kWh obțin tot 50 de puncte.</p>
+    </details>
+    <details>
+      <summary>Cât aport propriu îmi trebuie pentru 50 de puncte?</summary>
+      <p>Contribuția proprie primește 50 de puncte când aportul este de cel puțin 5/8 (62,5%) din valoarea investiției. De exemplu, la o investiție de 18.050 lei ai nevoie de un aport de 11.282 lei.</p>
+    </details>
+    <details>
+      <summary>Contează puterea invertorului pentru punctaj?</summary>
+      <p>Nu. Puterea invertorului influențează doar valoarea investiției. Punctajul depinde numai de contribuția proprie și de capacitatea bateriei.</p>
+    </details>
+    <details>
+      <summary>Care este punctajul maxim în programul Casa Verde – baterii?</summary>
+      <p>Punctajul maxim este de 100 de puncte: 50 pentru contribuția proprie și 50 pentru capacitatea sistemului de stocare.</p>
+    </details>
+    <details>
+      <summary>Este acesta calculatorul oficial AFM?</summary>
+      <p>Nu. Este un calculator orientativ realizat de SolarOne.ro pe baza formulelor din ghid. Rezultatul nu garantează aprobarea dosarului; verifică întotdeauna ghidul de finanțare în vigoare.</p>
+    </details>
+  </article>
+</section>
 
 <footer>
   Calculator orientativ, fără garanția aprobării dosarului. Puterea invertorului nu influențează punctajul. ·
